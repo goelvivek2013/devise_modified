@@ -1,0 +1,85 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Log in</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>International Telephone Input</title>
+    <link rel="stylesheet" href="../assets/intlTelInput.css">
+    <link rel="stylesheet" href="../assets/demo.css">
+  </head>
+  <body>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, autofocus: true, id: "phone" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>
+<div id="status-box" class="alert alert-success">
+  <p id="status-message">Status: Haven’t done anything yet</p>
+</div>
+
+    <!-- Load jQuery from CDN so can run demo immediately -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../assets/intlTelInput.js"></script>
+    <script>
+      $("#phone").intlTelInput({
+        //allowExtensions: true,
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        //autoPlaceholder: false,
+        //defaultCountry: "auto",
+        // geoIpLookup: function(callback) {
+        //   $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        //nationalMode: false,
+        //numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        utilsScript: "../assets/utils.js"
+      });
+    </script>
+  </body>
+</html>
